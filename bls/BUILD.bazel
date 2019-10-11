@@ -18,6 +18,12 @@ go_library(
     srcs = [
         "bls.go",
         "callback.go",
+        "include/bls/bls.h",
+        "include/bls/bls256.h",
+        "include/bls/bls384_256.h",
+        "include/mcl/bn.h",
+        "include/mcl/bn_c384_256.h",
+        "include/mcl/curve_type.h",
         "mcl.go",
     ],
     cgo = True,
@@ -37,7 +43,7 @@ go_library(
             "-Llib/darwin/arm64",
         ],
         "@io_bazel_rules_go//go/platform:linux_amd64": [
-            "-Llib/linux/amd64",
+            "-L lib/linux/amd64",
         ],
         "@io_bazel_rules_go//go/platform:windows_amd64": [
             "-Llib/windows/amd64",
