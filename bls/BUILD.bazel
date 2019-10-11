@@ -1,0 +1,56 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+load("@bazel_gazelle//:def.bzl", "gazelle")
+
+prefix = "github.com/nisdas/bls-go-binary"
+
+exports_files([
+    "LICENSE.md",
+])
+
+# gazelle:prefix github.com/nisdas/bls-go-binary
+gazelle(
+    name = "gazelle",
+    prefix = prefix,
+)
+
+go_library(
+    name = "go_default_library",
+    srcs = [
+        "bls.go",
+        "callback.go",
+        "mcl.go",
+    ],
+    cgo = True,
+    clinkopts = [
+        "-lbls384_256 -lstdc++ -lm",
+    ] + select({
+        "@io_bazel_rules_go//go/platform:android_arm": [
+            "-Llib/android/armeabi-v7a",
+        ],
+        "@io_bazel_rules_go//go/platform:android_arm64": [
+            "-Llib/android/arm64-v8a",
+        ],
+        "@io_bazel_rules_go//go/platform:darwin_amd64": [
+            "-Llib/darwin/amd64",
+        ],
+        "@io_bazel_rules_go//go/platform:darwin_arm64": [
+            "-Llib/darwin/arm64",
+        ],
+        "@io_bazel_rules_go//go/platform:linux_amd64": [
+            "-Llib/linux/amd64",
+        ],
+        "@io_bazel_rules_go//go/platform:windows_amd64": [
+            "-Llib/windows/amd64",
+        ],
+        "//conditions:default": [],
+    }),
+    copts = ["-Iinclude"],
+    importpath = "github.com/nisdas/bls-go-binary",
+    visibility = ["//visibility:public"],
+)
+
+go_test(
+    name = "go_default_test",
+    srcs = ["bls_test.go"],
+    embed = [":go_default_library"],
+)
