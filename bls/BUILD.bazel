@@ -48,49 +48,49 @@ go_library(
         "include/mcl/curve_type.h",
         "mcl.go",
     ],
+    cdeps = select({
+        "@io_bazel_rules_go//go/platform:android_arm": [
+            ":archive_android_arm",
+        ],
+        "@io_bazel_rules_go//go/platform:android_arm64": [
+            ":archive_android_arm64",
+        ],
+        "@io_bazel_rules_go//go/platform:darwin_amd64": [
+            ":archive_darwin_amd64",
+        ],
+        "@io_bazel_rules_go//go/platform:linux_amd64": [
+            ":archive_linux_amd64",
+        ],
+        "@io_bazel_rules_go//go/platform:windows_amd64": [
+            ":archive_windows_amd64",
+        ],
+        "//conditions:default": [],
+    }),
     cgo = True,
     clinkopts = [
         "-lbls384_256 -lstdc++ -lm",
     ] + select({
         "@io_bazel_rules_go//go/platform:android_arm": [
-            "-Llib/android/armeabi-v7a",
+            "-Lbls/lib/android/armeabi-v7a",
         ],
         "@io_bazel_rules_go//go/platform:android_arm64": [
-            "-Llib/android/arm64-v8a",
+            "-Lbls/lib/android/arm64-v8a",
         ],
         "@io_bazel_rules_go//go/platform:darwin_amd64": [
-            "-Llib/darwin/amd64",
+            "-Lbls/lib/darwin/amd64",
         ],
         "@io_bazel_rules_go//go/platform:darwin_arm64": [
-            "-Llib/darwin/arm64",
+            "-Lbls/lib/darwin/arm64",
         ],
         "@io_bazel_rules_go//go/platform:linux_amd64": [
             "-Lbls/lib/linux/amd64",
         ],
         "@io_bazel_rules_go//go/platform:windows_amd64": [
-            "-Llib/windows/amd64",
+            "-Lbls/lib/windows/amd64",
         ],
         "//conditions:default": [],
     }),
     copts = ["-Ibls/include"],
-    cdeps = select({
-                        "@io_bazel_rules_go//go/platform:android_arm": [
-                            ":archive_android_arm",
-                        ],
-                        "@io_bazel_rules_go//go/platform:android_arm64": [
-                            ":archive_android_arm64",
-                        ],
-                        "@io_bazel_rules_go//go/platform:darwin_amd64": [
-                            ":archive_darwin_amd64",
-                        ],
-                        "@io_bazel_rules_go//go/platform:linux_amd64": [
-                            ":archive_linux_amd64",
-                        ],
-                        "@io_bazel_rules_go//go/platform:windows_amd64": [
-                            ":archive_windows_amd64",
-                        ],
-                        "//conditions:default": [],
-                    }),
     importpath = "github.com/herumi/bls-go-binary/bls",
     visibility = ["//visibility:public"],
 )
