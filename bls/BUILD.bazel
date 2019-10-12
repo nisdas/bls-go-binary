@@ -1,17 +1,4 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
-load("@bazel_gazelle//:def.bzl", "gazelle")
-
-prefix = "github.com/nisdas/bls-go-binary"
-
-exports_files([
-    "LICENSE.md",
-])
-
-# gazelle:prefix github.com/nisdas/bls-go-binary
-gazelle(
-    name = "gazelle",
-    prefix = prefix,
-)
 
 cc_library(
     name = "archive_linux_amd64",
@@ -104,7 +91,7 @@ go_library(
                         ],
                         "//conditions:default": [],
                     }),
-    importpath = "github.com/nisdas/bls-go-binary",
+    importpath = "github.com/herumi/bls-go-binary/bls",
     visibility = ["//visibility:public"],
 )
 
