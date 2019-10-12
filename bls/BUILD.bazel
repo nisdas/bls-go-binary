@@ -65,14 +65,14 @@ go_library(
             "-Llib/darwin/arm64",
         ],
         "@io_bazel_rules_go//go/platform:linux_amd64": [
-            "-L lib/linux/amd64",
+            "-Lbls/lib/linux/amd64",
         ],
         "@io_bazel_rules_go//go/platform:windows_amd64": [
             "-Llib/windows/amd64",
         ],
         "//conditions:default": [],
     }),
-    copts = ["-Iinclude"],
+    copts = ["-Ibls/include"],
     cdeps = select({
                         "@io_bazel_rules_go//go/platform:android_arm": [
                             ":archive_android_arm",
