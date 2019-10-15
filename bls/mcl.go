@@ -2,7 +2,7 @@ package bls
 
 /*
 #cgo CFLAGS:-I./include
-#include <mcl/bn_c384_256.h>
+#include <include/mcl/bn_c384_256.h>
 */
 import "C"
 import "fmt"
