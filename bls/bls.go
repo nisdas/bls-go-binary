@@ -433,7 +433,7 @@ func (sig *Sign) Serialize() []byte {
 func (sig *Sign) Deserialize(buf []byte) error {
 	// #nosec
 	err := C.blsSignatureDeserialize(&sig.v, unsafe.Pointer(&buf[0]), C.mclSize(len(buf)))
-	if err == 0 {
+	if err != 0 {
 		return fmt.Errorf("err blsSignatureDeserialize %x", buf)
 	}
 	return nil
