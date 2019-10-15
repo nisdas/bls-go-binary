@@ -58,7 +58,7 @@ func (id *ID) Serialize() []byte {
 func (id *ID) Deserialize(buf []byte) error {
 	// #nosec
 	err := C.blsIdDeserialize(&id.v, unsafe.Pointer(&buf[0]), C.mclSize(len(buf)))
-	if err == 0 {
+	if err != 0 {
 		return fmt.Errorf("err blsIdDeserialize %x", buf)
 	}
 	return nil
@@ -165,7 +165,7 @@ func (sec *SecretKey) Serialize() []byte {
 func (sec *SecretKey) Deserialize(buf []byte) error {
 	// #nosec
 	err := C.blsSecretKeyDeserialize(&sec.v, unsafe.Pointer(&buf[0]), C.mclSize(len(buf)))
-	if err == 0 {
+	if err != 0 {
 		return fmt.Errorf("err blsSecretKeyDeserialize %x", buf)
 	}
 	return nil
@@ -335,7 +335,7 @@ func (pub *PublicKey) Serialize() []byte {
 func (pub *PublicKey) Deserialize(buf []byte) error {
 	// #nosec
 	err := C.blsPublicKeyDeserialize(&pub.v, unsafe.Pointer(&buf[0]), C.mclSize(len(buf)))
-	if err == 0 {
+	if err != 0 {
 		return fmt.Errorf("err blsPublicKeyDeserialize %x", buf)
 	}
 	return nil
