@@ -1,7 +1,7 @@
 package bls
 
 /*
-#cgo CFLAGS:-I./include
+#cgo CFLAGS:-I./include -DBLS_SWAP_G
 #cgo LDFLAGS:-lbls384_256 -lstdc++ -lm
 #cgo linux,amd64 LDFLAGS:-L${SRCDIR}/lib/linux/amd64
 #cgo darwin,amd64 LDFLAGS:-L${SRCDIR}/lib/darwin/amd64

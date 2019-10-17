@@ -67,7 +67,7 @@ go_library(
         "//conditions:default": [],
     }),
     cgo = True,
-    copts = ["-Ibls/include"],
+    copts = ["-Ibls/include","-DBLS_SWAP_G"],
     importpath = "github.com/herumi/bls-go-binary/bls",
     visibility = ["//visibility:public"],
 )
